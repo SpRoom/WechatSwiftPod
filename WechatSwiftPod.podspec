@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WechatSwiftPod'
-  s.version          = '1.8.4'
+  s.version          = '1.8.4.1'
   s.summary          = 'wechat pod framework swift support'
   s.swift_version = '4.2'
 
@@ -47,8 +47,7 @@ Pod::Spec.new do |s|
   s.static_framework = true
 
   s.libraries = 'sqlite3', 'c++', 'z.1.2.5'
-  s.frameworks = 'WebKit', 'SystemConfiguration', 'CoreTelephony', 'UIKit', 'CoreMotion', 'CoreGraphics', 'ImageIO', 'CFNetwork', 'MobileCoreServices', 'MessageUI', 'AddressBook', 'AddressBookUI', 'Security', 'AudioToolbox', 'CoreLocation', 'CoreMedia', 'CoreVideo', 'Accelerate', 'AVFoundation'
-
+  s.frameworks = 'SystemConfiguration', 'CoreTelephony', 'CFNetwork', 'CoreGraphics', 'CFNetwork', 'Security'
   s.vendored_libraries = 'WechatSwiftPod/libWeChatSDK.a'
   #s.vendored_frameworks = 'XQCPaySDK/Frameworks/YSSDK.framework', 'XQCPaySDK/Frameworks/YSEPaySDK.framework'
   #s.public_header_files = 'XQCPaySDK/Frameworks/YSEPaySDK.framework/Headers/YSEPay.h'
