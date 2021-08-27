@@ -19,10 +19,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-    wechat support
+    wechat sdk pod support for Swift
                        DESC
 
-  s.homepage         = 'https://github.com'
+  s.homepage         = 'https://github.com/SpRoom/WechatSwiftPod'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'spec' => 'spectatornan@gmail.com' }
