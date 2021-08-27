@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
 
   s.static_framework = true
 
-  s.libraries = 'sqlite3', 'c++', 'z.1.2.5'
+  s.libraries = 'c++', 'z'
   s.frameworks = 'Security', 'CoreGraphics', 'WebKit'
   s.vendored_libraries = 'WechatSwiftPod/libWeChatSDK.a'
  
@@ -45,7 +45,7 @@ Pod::Spec.new do |s|
   s.source_files  = "WechatSwiftPod/*.h", "WechatSwiftPod/*.modulemap"
   s.preserve_path = "WechatSwiftPod/WechatSwiftPod.modulemap"
   s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '$(PODS_ROOT)/WechatSwiftPod' }
-  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES','OTHER_LDFLAGS' => '-ObjC -all_load' }
 
 
 end
