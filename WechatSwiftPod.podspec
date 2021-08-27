@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'WechatSwiftPod'
-  s.version          = '1.9.2'
+  s.version          = '1.9.2.1'
   s.summary          = 'wechat pod framework swift support'
   s.swift_version = '5'
 
@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'spec' => 'spectatornan@gmail.com' }
-  s.source           = { :git => 'https://github.com/SpectatorNanWithZZC/WechatSwiftPod.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/SpRoom/WechatSwiftPod.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   #s.ios.deployment_target = '8.0'
@@ -34,26 +34,14 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.source_files = 'WechatSwiftPod/**/*'
-  
-  #s.resource = 'XQCPaySDK/Assets/*.bundle'
-  
-   #s.resource_bundles = {
-   #    'XQCPaySDK' => ['XQCPaySDK/Assets/*.png']
-   #}
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 
   s.static_framework = true
 
   s.libraries = 'sqlite3', 'c++', 'z.1.2.5'
-  s.frameworks = 'SystemConfiguration', 'CoreTelephony', 'CFNetwork', 'CoreGraphics', 'CFNetwork', 'Security'
+  s.frameworks = 'Security', 'CoreGraphics', 'WebKit'
   s.vendored_libraries = 'WechatSwiftPod/libWeChatSDK.a'
-  #s.vendored_frameworks = 'XQCPaySDK/Frameworks/YSSDK.framework', 'XQCPaySDK/Frameworks/YSEPaySDK.framework'
-  #s.public_header_files = 'XQCPaySDK/Frameworks/YSEPaySDK.framework/Headers/YSEPay.h'
-  #s.private_header_files = 'XQCPaySDK/Frameworks/YSEPaySDK.framework/Headers/YSEPay.h'
+ 
   
-  #s.preserve_path = 'XQCPaySDK/Frameworks/*'
   s.source_files  = "WechatSwiftPod/*.h", "WechatSwiftPod/*.modulemap"
   s.preserve_path = "WechatSwiftPod/WechatSwiftPod.modulemap"
   s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '$(PODS_ROOT)/WechatSwiftPod' }
