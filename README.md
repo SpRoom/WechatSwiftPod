@@ -1,3 +1,16 @@
+
+# WechatSwiftPod
+
+## 安装
+在 Podfile文件中引入：
+```ruby
+pod "WechatSwiftPod"
+```
+
+## 用法
+
+[参考官方文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html)
+
 重要!
 
 SDK1.9.2
