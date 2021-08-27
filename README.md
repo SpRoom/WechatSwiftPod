@@ -11,7 +11,7 @@ pod "WechatSwiftPod"
 
 [参考官方文档](https://developers.weixin.qq.com/doc/oplatform/Mobile_App/Access_Guide/iOS.html)
 
-重要!
+## Changelog
 
 SDK1.9.2
 1. 新增发起企微客服会话能力
