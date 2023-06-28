@@ -248,6 +248,23 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 @end
 
+
+#pragma mark - WXQRCodePayReq
+@interface WXQRCodePayReq : BaseReq
+/** 码内容
+ * @note 必填，码长度必须大于0且小于10K
+ */
+@property (nonatomic, copy) NSString *codeContent;
+/** 额外信息
+ * @note 长度必须大于0且小于10K
+ */
+@property (nonatomic, copy) NSString *extraMsg;
+
+@end
+
+@interface WXQRCodePayResp : BaseResp
+@end
+
 #endif
 
 
@@ -268,6 +285,15 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note state字符串长度不能超过1K
  */
 @property (nonatomic, copy) NSString *state;
+
+@property (nonatomic, assign) BOOL isOption1;
+
+/** 是否关闭自动授权
+ * @note YES为关闭自动授权，每次登陆都需要用户手动授权；NO为允许自动授权
+ */
+@property (nonatomic, assign) BOOL nonautomatic;
+
+@property (nonatomic, copy) NSString *extData;
 
 @end
 
@@ -303,6 +329,41 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 必填，url长度必须大于0且小于10K
  */
 @property (nonatomic, copy) NSString *url;
+
+@end
+
+#pragma mark - WXStateJumpWXMiniProgramInfo
+/*! @brief 状态小尾巴跳转指定小程序的信息
+ */
+@interface WXStateJumpMiniProgramInfo : WXStateJumpInfo
+/** 小程序username
+ * @note 必填
+ */
+@property (nonatomic, copy) NSString *username;
+
+/** 小程序页面的路径
+ * @attention 不填默认拉起小程序首页
+ */
+@property (nonatomic, copy, nullable) NSString *path;
+
+/** 分享小程序的版本
+ * @attention （正式，开发，体验）
+ */
+@property (nonatomic, assign) WXMiniProgramType miniProgramType;
+
+@end
+
+
+
+#pragma mark - WXStateJumpWXMiniProgramInfo
+/*! @brief 状态小尾巴跳转指定视频号主页信息
+ */
+@interface WXStateJumpChannelProfileInfo : WXStateJumpInfo
+/** 视频号username
+ * @note 必填，username长度必须大于0且小于1K
+ */
+@property (nonatomic, copy) NSString *username;
+
 
 @end
 
@@ -746,10 +807,21 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 @property (nonatomic, strong) id mediaObject;
 
+/** 缩略图的hash值
+ * @note 使用sha256得到，用于计算签名
+ */
+@property (nonatomic, copy, nullable) NSString *thumbDataHash;
+
+/** 消息签名
+ * @note 用于校验消息体是否被篡改过
+ */
+@property (nonatomic, copy, nullable) NSString *msgSignature;
+
+
 /*! @brief 设置消息缩略图的方法
  *
  * @param image 缩略图
- * @note 大小不能超过64K
+ * @note 大小不能超过256K
  */
 - (void)setThumbImage:(UIImage *)image;
 
@@ -775,6 +847,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 大小不能超过25M
  */
 @property (nonatomic, strong) NSData *imageData;
+
+/** 图片数据的hash值
+ * @note 使用sha256得到，用于计算签名
+ */
+@property (nonatomic, copy, nullable) NSString *imgDataHash;
 
 @end
 
@@ -826,6 +903,15 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 #pragma mark - WXMusicVideoObject
 
+@interface WXMusicVipInfo : NSObject
+
+/**付费歌曲的id
+ * @note 长度不能超过32K
+ */
+@property (nonatomic, copy) NSString *musicId;
+
+@end
+
 
 @interface WXMusicVideoObject : NSObject
 
@@ -865,6 +951,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  */
 @property (nonatomic, strong) NSData *hdAlbumThumbData;
 
+/** 高清封面图数据的hash值
+ * @note 使用sha256得到，用于计算签名
+ */
+@property (nonatomic, copy, nullable) NSString *hdAlbumThumbFileHash;
+
 /**音乐专辑名称
  * @note 长度不能超过1k
  */
@@ -889,6 +980,11 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 选填，建议填写，用户进入歌曲详情页将展示内嵌的运营H5，可展示该歌曲的相关评论、歌曲推荐等内容，不可诱导下载、分享等。
  */
 @property (nonatomic, copy, nullable) NSString *musicOperationUrl;
+
+/** 付费歌曲相关信息
+ * @note 选填，如果歌曲是需要付费的，那么将付费歌曲id等信息封装在内。
+ */
+@property (nonatomic, strong) WXMusicVipInfo *musicVipInfo;
 
 @end
 
@@ -938,6 +1034,13 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
  * @note 不能为空且长度不能超过10K
  */
 @property (nonatomic, copy) NSString *webpageUrl;
+
+/**是否是私密消息
+ */
+@property (nonatomic, assign) BOOL isSecretMessage;
+
+/** 业务所需的额外信息 */
+@property (nonatomic, strong, nullable) NSDictionary *extraInfoDic;
 
 @end
 
@@ -1132,6 +1235,31 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 
 @end
 
+@interface WXNativeGamePageObject : NSObject
+
+/** 是否为视频类型
+ */
+@property (nonatomic, assign) BOOL isVideo;
+
+/** 视频时长
+ @note 当为视频类型时，必填；单位为秒
+ */
+@property (nonatomic, assign) UInt32 videoDuration;
+
+/** 透传字段
+ @note 长度限制为100K
+ */
+@property (nonatomic, copy) NSString *shareData;
+
+/** 缩略图
+ @note 大小限制为256K
+ */
+@property (nonatomic, strong) NSData *gameThumbData;
+
++ (WXNativeGamePageObject *)object;
+
+@end
+
 #pragma mark - WXLaunchMiniProgramReq
 
 /*! @brief WXLaunchMiniProgramReq对象, 可实现通过sdk拉起微信小程序
@@ -1237,6 +1365,27 @@ typedef void(^WXCheckULCompletion)(WXULCheckStep step, WXCheckULStepResult* resu
 @end
 
 @interface WXOpenCustomerServiceResp : BaseResp
+
+/** 业务返回数据
+ */
+@property (nonatomic, copy, nullable) NSString *extMsg;
+
+@end
+
+
+#pragma mark - WXChannelStartLiveReq
+
+@interface WXChannelStartLiveReq : BaseReq
+
++ (WXChannelStartLiveReq *)object;
+
+/** 必填，直播业务数据（json格式）
+ */
+@property (nonatomic, copy) NSString *liveJsonInfo;
+
+@end
+
+@interface WXChannelStartLiveResp : BaseResp
 
 /** 业务返回数据
  */
